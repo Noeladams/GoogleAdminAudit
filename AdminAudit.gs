@@ -3,7 +3,7 @@
  * report includes the time, user, and login result.
  */
 function generateLoginActivityReport() {
-  var spreadsheet = SpreadsheetApp.openByUrl('<INSERT YOUR GOOGLE SHEET HERE');
+  var spreadsheet = SpreadsheetApp.openByUrl('<Insert Google Sheet Link Here>');
  var sheet = spreadsheet.getActiveSheet();
   var rows = [];
   var pageToken;
@@ -30,11 +30,16 @@ function generateLoginActivityReport() {
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
         var row = [
+        //Append Date
           new Date(item.id.time),
+        //Append User who Did it 
           item.actor.email,
-          //item.events[0].eventType,
-         //item.events[0].name,
-         item.events[0].parameters.toString(0),
+        //Pulls the event name
+          item.events[0].name,
+        //Pulls the event type
+          item.events[0].eventType,
+        //Detailed log string can't pull full api with this though
+          item.events[0].parameters.toString(0),
           ];
         sheet.appendRow(row);
         //  rows.push(row);
@@ -47,7 +52,7 @@ function generateLoginActivityReport() {
 ;
 
     // Append the headers.
-    var headers = ['Time', 'User', 'Login Result'];
+    var headers = ['Time', 'User' , 'Event Name' , 'Event Type' , 'Log Result'];
     sheet.appendRow(headers);
 
     // Append the results.
