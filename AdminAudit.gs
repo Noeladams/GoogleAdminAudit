@@ -3,7 +3,7 @@
  * report includes the time, user, and login result.
  */
 function generateLoginActivityReport() {
-  var spreadsheet = SpreadsheetApp.openByUrl('<Insert Google Sheet Link Here>');
+  var spreadsheet = SpreadsheetApp.openByUrl('YouSheetHere');
  var sheet = spreadsheet.getActiveSheet();
   var rows = [];
   var pageToken;
