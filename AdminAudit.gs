@@ -3,7 +3,7 @@
  * report includes the time, user, and login result.
  */
 function generateLoginActivityReport() {
-  var spreadsheet = SpreadsheetApp.openByUrl('YouSheetHere');
+  var spreadsheet = SpreadsheetApp.openByUrl('<Insert your spreadsheet link here>');
  var sheet = spreadsheet.getActiveSheet();
   var rows = [];
   var pageToken;
@@ -13,8 +13,9 @@ function generateLoginActivityReport() {
   //Pull only a week at a time
   
     var now = new Date();
-  var oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-  var startTime = oneWeekAgo.toISOString();
+  //var oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  var oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+  var startTime = oneHourAgo.toISOString();
   var endTime = now.toISOString();
   
   
@@ -25,6 +26,8 @@ function generateLoginActivityReport() {
       maxResults: 700,
       pageToken: pageToken
     });
+    
+   
     var items = page.items;
     if (items) {
       for (var i = 0; i < items.length; i++) {
@@ -35,9 +38,9 @@ function generateLoginActivityReport() {
         //Append User who Did it 
           item.actor.email,
         //Pulls the event name
-          item.events[0].name,
+         item.events[0].name,
         //Pulls the event type
-          item.events[0].eventType,
+         item.events[0].eventType,
         //Detailed log string can't pull full api with this though
           item.events[0].parameters.toString(0),
           ];
@@ -52,7 +55,7 @@ function generateLoginActivityReport() {
 ;
 
     // Append the headers.
-    var headers = ['Time', 'User' , 'Event Name' , 'Event Type' , 'Log Result'];
+    var headers = ['Time', 'User', 'Event Name', 'Event Type', 'Log Result'];
     sheet.appendRow(headers);
 
     // Append the results.
