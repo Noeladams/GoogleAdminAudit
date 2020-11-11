@@ -8,7 +8,8 @@ function generateLoginActivityReport() {
   var rows = [];
   var pageToken;
   var page;
-  
+  var userKey = 'user@domain';
+  var applicationName = 'admin';
   
   //Pull only a week at a time
   
@@ -20,7 +21,7 @@ function generateLoginActivityReport() {
   
   
   do {
-    page = AdminReports.Activities.list('all', 'admin', {
+    page = AdminReports.Activities.list(userKey, applicationName, {
     startTime: startTime,
     endTime: endTime,
       maxResults: 700,
