@@ -1,3 +1,5 @@
+This works if you don't want to use GAM or Graylog.
+
 /**
  * Generates a login activity report for the last week as a spreadsheet. The
  * report includes the time, user, and login result.
